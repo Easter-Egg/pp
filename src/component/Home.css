@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  border-bottom:1px solid gray;
+  padding-left:20px;
+}
+
+footer {
+  border-top:1px solid gray;
+  padding:20px;
+  text-align: center;
+}
+
+.content {
+  display:flex;
+}
+
+main {
+  padding:10px;
+  width: 100%;
+}
+
+.pp-list {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.pp-list-card {
+  width: 200px;
+  margin: 4px !important;
+  border: 1px solid gray;
+}
