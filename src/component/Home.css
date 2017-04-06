@@ -1,3 +1,17 @@
+@import '../../node_modules/open-color/open-color.css';
+
+body {
+  background-color: var(--oc-gray-0);
+  font-weight: 400;
+  font-size: 1.6em;
+  line-height: 1.6;
+}
+
+h2 {
+  line-height: 1.2;
+  margin-bottom: 1.6rem;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -24,12 +38,34 @@ main {
 }
 
 .pp-list {
-  text-align: center;
   margin: 0 auto;
 }
 
 .pp-list-card {
-  width: 200px;
+  width: 320px;
+  height: 400px;
   margin: 4px !important;
-  border: 1px solid gray;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+  background-color: #fff;
+  margin-bottom: 1.6rem;
+}
+
+.card-thumbnail {
+  min-height: 240px;
+  background-color: var(--oc-gray-7);
+}
+
+.card-thumbnail img{
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.card-padding {
+  padding: 1.6rem;
 }

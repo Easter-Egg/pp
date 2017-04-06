@@ -17,7 +17,8 @@ export default class Home extends Component {
     this.state = {
       email: '',
       authenticated: false,
-      loading: true
+      loading: true,
+      posts: [],
     }
   }
 
@@ -33,6 +34,20 @@ export default class Home extends Component {
         browserHistory.push('/');
       }
     });
+
+    const db = firebase.database();
+    const postsRef = db.ref().child('posts');
+
+    postsRef.limitToLast(10).once('value', snapshot => {
+      let posts = this.state.posts.slice();
+
+      snapshot.forEach(function(data) {
+        posts.push(data.val());
+      });
+
+      this.setState({posts: posts});
+      console.log(this.state.posts)
+    });
   }
 
   componentWillUnmount () {
@@ -44,82 +59,27 @@ export default class Home extends Component {
   }
 
   render () {
-    var cards = [
-      {
-        key: '1',
-        title: '사계 피아노 반주자 구합니다',
-        content: '로렘 입섬',
-        status: '조율 중',
-        category: '0',
-      },
+    var posts = this.state.posts
 
-      {
-        key: '2',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
+    var childElements = posts.map(function(post){
+      // const randomHeight = Math.random() * (400 - 550) + 400;
 
-      {
-        key: '3',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-
-      {
-        key: '4',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-
-      {
-        key: '5',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-
-      {
-        key: '6',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-
-      {
-        key: '7',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-
-      {
-        key: '8',
-        title: '자작곡인데 노래 불러주신 분 찾습니다.',
-        content: '로렘 입섬 로렘 입섬',
-        status: '구하는 중',
-        category: '1',
-      },
-    ];
-
-    var childElements = cards.map(function(card){
-      const randomHeight = Math.random() * (250 - 400) + 250;
-
-      const style = {
-        height: randomHeight,
-      }
+      // const style = {
+      //   height: randomHeight,
+      // }
 
       return (
-        <div className="pp-list-card" key={card.key} style={style}>
-          card {card.key}
+        <div className="pp-list-card" key={post.idx}>
+          <div className="card-thumbnail">
+            <img src={post.thumbnail} alt="thumbnail" className="card-image-radious"/>
+          </div>
+
+          <div className="card-header card-padding">
+            {post.title}
+          </div>
+
+          <div className="card-content card-padding">
+          </div>
         </div>
       );
     });
@@ -138,7 +98,7 @@ export default class Home extends Component {
               {this.state.loading ? (
                 <div>로딩 중...</div>
               ) : (
-                <Masonry 
+                <Masonry
                   className={'pp-list'} // default ''
                   elementType={'div'} // default 'div'
                   options={masonryOptions} // default {}
