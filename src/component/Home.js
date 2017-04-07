@@ -74,11 +74,16 @@ export default class Home extends Component {
             <img src={post.thumbnail} alt="thumbnail" className="card-image-radious"/>
           </div>
 
-          <div className="card-header card-padding">
-            {post.title}
+          <div className="card-header card-padding-1">
+            <div className="card-tag">연주</div>
+            <div className="card-tag">피아노</div>
           </div>
 
           <div className="card-content card-padding">
+            <h3>사계 중 여름 3악장</h3>
+          </div>
+
+          <div className="card-footer card-padding">
           </div>
         </div>
       );
@@ -87,8 +92,10 @@ export default class Home extends Component {
     return (
         <div className="container">
           <header>
-            <h1>HOME</h1>
-            <div>
+            <div className="title">
+              <h1>HOME</h1>
+            </div>
+            <div className="nav">
               {this.state.email} <button onClick={this.handleLogout}>Logout</button>
             </div>
           </header>
@@ -110,10 +117,6 @@ export default class Home extends Component {
               )}
             </main>
           </section>
-
-          <footer>
-            CopyRight
-          </footer>
       </div>
     )
   }
